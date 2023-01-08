@@ -7,11 +7,12 @@ const forecast = require('./utils/forecast');
 
 //Creating express App.
 const app = express();
+const port = process.env.PORT || 3000;
 
 //Define Path for Express.
 const publicDirectoryPath = path.join(__dirname, '../public');
-const viewsPath = path.join(__dirname, '../templates/views')
-const partialPath = path.join(__dirname, '../templates/partials')
+const viewsPath = path.join(__dirname, '../templates/views');
+const partialPath = path.join(__dirname, '../templates/partials');
 
 //Setup handlebar engine and view location
 app.set('view engine', 'hbs');
@@ -64,17 +65,17 @@ app.get('/weather', (req, res) => {
     });
 });
 
-app.get('/products', (req, res) => {
-    if (!req.query.search) {
-        return res.send({
-            error: "you must provide a search term",
-        });
-    }
-    console.log(req.query)
-    res.send({
-        products: []
-    });
-});
+// app.get('/products', (req, res) => {
+//     if (!req.query.search) {
+//         return res.send({
+//             error: "you must provide a search term",
+//         });
+//     }
+//     console.log(req.query)
+//     res.send({
+//         products: []
+//     });
+// });
 
 app.get('/help/*', (req, res) => {
     res.render('error', {
@@ -90,6 +91,6 @@ app.get('*', (req, res) => {
     })
 });
 
-app.listen(3000, () => {
-    console.log('server is up on port 3000');
+app.listen(port, () => {
+    console.log('server is up on port' + port);
 });
